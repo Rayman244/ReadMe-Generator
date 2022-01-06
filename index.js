@@ -1,5 +1,7 @@
+
 const inquirer = require('inquirer');
 const fs = require('fs')
+const licenseMit = require('./licenses/mit')
 const questions = [
     {
         type:'input',
@@ -38,10 +40,11 @@ const questions = [
         default: 'Credits'
     },
     {
-        type:'input',
+        type:'list',
         name:'licenses',
         message:'What licences are used?',
-        default: 'Licenses'
+        default: 'MIT',
+        choices:['GNU AGPLv3','GNU GPLv3','GNU LGPLv3','Mozilla Public 2.0','Apache 2.0','MIT','Boost Software 1.0', 'The Unilicenst']
     },
     {
         type:'input',
@@ -64,6 +67,8 @@ const questions = [
 
 ## Description
  ${answers.description}
+
+ ![License](https://img.shields.io/badge/license-${answers.licenses}-lightgrey)
              
 ## Table of Contents
           
@@ -87,25 +92,46 @@ const questions = [
  ${answers.credits}
       
 ## License
- ${answers.licenses}
+ ${getLicense(answers.licenses,answers.name)}
             
 ## Badges
  ![badmath](https://img.shields.io/github/languages/top/nielsenjared/badmath)
  Badges aren't necessary, per se, but they demonstrate street cred. Badges let other developers know that you know what you're doing. Check out the badges hosted by [shields.io](https://shields.io/). You may not understand what they all represent now, but you will in time.
       
 ## Features
- ${answers.features}     
-      
+ ${answers.features}
+ 
 ## How to Contribute
- https://github.com/${answers.userName}/
+ https://github.com/${answers.userName}/${answers.projTitle}
       
 ## Tests
  ${answers.tests}     
       
  ## Questions
- email me at [Email](mailto:${answers.email})
+ message me on Github https://github.com/${answers.userName}/
+ email me at [${answers.email}](mailto:${answers.email})
  
  `
+  }
+  const getLicense = (type) =>{
+
+      switch(type){
+        // case 'GNU AGPLv3': ;
+        // break;
+        // case 'GNU GPLv3': ; 
+        // break;
+        // case 'GNU LGPLv3':;
+        // break;
+        // case 'Mozilla Public 2.0':;
+        // break;
+        // case 'Apache 2.0':;
+        // break;
+        // case 'Boost Software 1.0':;
+        // break;
+        // case 'The Unilicenst' : ;
+        // break;
+        default: return licenseMit.mitLicense();
+      }
   }
 inquirer
   .prompt(questions)
