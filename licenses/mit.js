@@ -1,9 +1,9 @@
-const mitLicense = () => {
-    const curYear = new Date().getFullYear()
+const mitLicense = (year) => {
+    // const curYear = new Date().getFullYear()
 
    return `MIT License
 
-Copyright (c) ${curYear}
+Copyright (c) ${year}
     
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
